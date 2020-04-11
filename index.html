@@ -48,7 +48,7 @@ h1, h2, p {
 	right: 10px;
 }
 
-.slider-grid {
+.slider-inner {
 	/* Don't change these */
 	display: flex;
 	position: relative;
@@ -59,7 +59,7 @@ h1, h2, p {
 	transition: left 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
 }
 
-.slider-grid > * {
+.slider-inner > * {
 	/* Don't change this */
 	min-width: 100%; 
 
@@ -101,13 +101,13 @@ window.onload = () => {
 		let rightArrow = q('.arrow.right')
 		let leftArrow = q('.arrow.left')
 
-		let sliderGrid = q('.slider-grid')
-		let maxImageId = sliderGrid.children.length - 1
+		let sliderInner = q('.slider-inner')
+		let maxImageId = sliderInner.children.length - 1
 		// We use "image" but the children of the slider can be also be a flexbox or grid
 
 		// Toggle animation in the slider grid
 		let toggleAnimation = () => {
-			sliderGrid.classList.toggle('noanim') 
+			sliderInner.classList.toggle('noanim') 
 		}
 
 		// Switch which image is being shown
@@ -115,7 +115,7 @@ window.onload = () => {
 			let percentage = imageId * 100
 
 
-			sliderGrid.style.left = -percentage.toString() + "%"
+			sliderInner.style.left = -percentage.toString() + "%"
 
 			slider.dataset.currentImage = currentImageId.toString()
 		}
@@ -189,7 +189,7 @@ window.onload = () => {
 			<img src="images/right.png">
 		</div>
 
-		<div class="slider-grid">
+		<div class="slider-inner">
 			<img src="images/character4.jpg">
 			<img src="images/character2.jpg">
 			<img src="images/character3.jpg">
@@ -208,7 +208,7 @@ window.onload = () => {
 			<img src="images/right.png">
 		</div>
 
-		<div class="slider-grid">
+		<div class="slider-inner">
 			<img src="images/character4.jpg">
 			<img src="images/character2.jpg">
 			<img src="images/character3.jpg">
@@ -228,7 +228,7 @@ window.onload = () => {
 			<img src="images/right.png">
 		</div>
 
-		<div class="slider-grid">
+		<div class="slider-inner">
 			<div style="display: flex;"> 
 				<img src="images/character4.jpg">
 				<img src="images/character2.jpg">
@@ -252,7 +252,7 @@ window.onload = () => {
 			<img src="images/right.png">
 		</div>
 
-		<div class="slider-grid">
+		<div class="slider-inner">
 			<div style="display: grid; grid-template-columns: repeat(3, 1fr)"> 
 				<img src="images/character4.jpg">
 				<img src="images/character2.jpg">
