@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Image Slider Sample</title>
+	<meta charset="utf-8">
+	<meta name="author" content="Aliya N. Anindita">
+
+<style>
+body {
+	font-family: sans-serif;
+}
+h1, h2, p {
+	text-align: center;
+}
+
+.slider-container {
+	/* Positioning the slider.
+	Feel free to change! */
+	width: 90%;
+	max-width: 800px;
+	margin: 10px auto;
+
+	/* Don't change these */
+	position: relative; 
+	overflow-x: hidden;
+}
+
+.arrow {
+	/* Don't change these */
+	position: absolute; 
+	display: flex;
+	align-items: center;
+	height: 100%;
+	z-index: 10;
+	/* But you can change this one */
+	cursor: pointer;
+}
+
+.arrow.left {
+	/* Positioning the arrow.
+	 Feel free to change! */
+	left: 10px;
+}
+
+.arrow.right {
+	/* Positioning the arrow.
+	 Feel free to change! */
+	right: 10px;
+}
+
+.slider-grid {
+	/* Don't change these */
+	display: flex;
+	position: relative;
+	left: 0; 		
+
+	/* Feel free to change these! */
+	align-items: center;
+	transition: left 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.slider-grid > * {
+	/* Don't change this */
+	min-width: 100%; 
+
+	/* To keep it looking neat, don't change these */
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.slider-container img {
+	/* These will keep image's size proportional and make sure it doesn't bleed outside the box. */
+	max-width: 100%;
+	object-fit: contain;
+}
+
+.noanim {
+	transition: none;
+}
+</style>
+
+<script>
+window.onload = () => {
+	// Slider code
+	// Apply to all slider in the page
+	document.querySelectorAll('.slider-container').forEach( (slider) => {
+
+		// Utility querier
+		let q = (selector) => {
+			return slider.querySelector(selector)
+		}
+		let qall = (selector) => {
+			return slider.querySelectorAll(selector)
+		}
+
+		if (!slider.dataset.currentImage) {
+			slider.dataset.currentImage = 0
+		}
+		let currentImageId = parseInt(slider.dataset.currentImage)
+
+		let rightArrow = q('.arrow.right')
+		let leftArrow = q('.arrow.left')
+
+		let sliderGrid = q('.slider-grid')
+		let maxImageId = sliderGrid.children.length - 1
+		// We use "image" but the children of the slider can be also be a flexbox or grid
+
+		// Toggle animation in the slider grid
+		let toggleAnimation = () => {
+			sliderGrid.classList.toggle('noanim') 
+		}
+
+		// Switch which image is being shown
+		let changePos = (imageId) => {
+			let percentage = imageId * 100
+
+
+			sliderGrid.style.left = -percentage.toString() + "%"
+
+			slider.dataset.currentImage = currentImageId.toString()
+		}
+
+		// Make the left/rightmost arrow invisible when left/rightmost image is shown
+		let updateArrowVisibility = () => {
+			if (currentImageId == maxImageId) {
+				rightArrow.style.visibility = "hidden"
+			} 
+			else {
+				rightArrow.style.visibility = "visible"
+			}
+			if (currentImageId == 0) {
+				leftArrow.style.visibility = "hidden"
+			}
+			else {
+				leftArrow.style.visibility = "visible"
+			}
+		}
+
+		// Set initial image shown
+		// Turn off animation just for this initial setup
+		updateArrowVisibility()
+		toggleAnimation()
+		changePos(currentImageId)
+		setTimeout(toggleAnimation, 10)
+
+		rightArrow.onclick = () => {
+			currentImageId += 1
+
+			// No change if it's the rightmost image
+			if (currentImageId > maxImageId) {
+				currentImageId = maxImageId
+			}
+			else {
+				changePos(currentImageId)
+				updateArrowVisibility()
+			}
+
+		}
+
+		leftArrow.onclick = () => {
+			currentImageId -= 1
+
+			// No change if it's the leftmost image
+			if (currentImageId < 0) {
+				currentImageId = 0
+			}
+			else {
+				changePos(currentImageId)
+				updateArrowVisibility()
+			}
+		}
+
+	})
+}
+</script>
+
+</head>
+
+<body>
+<div style="max-width: 600px; margin: 0 auto;">
+	<h1>Pure HTML/CSS/JS Slider</h1>
+	<h2>Default Example</h2>
+	<div class="slider-container">
+		<div class="arrow left">
+			<img src="left.png">
+		</div>
+
+		<div class="arrow right">
+			<img src="right.png">
+		</div>
+
+		<div class="slider-grid">
+			<img src="character4.jpg">
+			<img src="character2.jpg">
+			<img src="character3.jpg">
+			<img src="character5.jpg">
+			<img src="character6.jpg">
+		</div>
+	</div>
+
+	<h2> Different Initial image</h2>
+	<div class="slider-container" data-current-image="3">
+		<div class="arrow left">
+			<img src="left.png">
+		</div>
+
+		<div class="arrow right">
+			<img src="right.png">
+		</div>
+
+		<div class="slider-grid">
+			<img src="character4.jpg">
+			<img src="character2.jpg">
+			<img src="character3.jpg">
+			<img src="character5.jpg">
+			<img src="character6.jpg">
+		</div>
+	</div>
+
+	<h2>Using flexbox instead of images</h2>
+	<p>Make sure all flexboxes have the same number of children. If you don't, content of flexbox will bleed to the next.</p> 
+	<div class="slider-container">
+		<div class="arrow left">
+			<img src="left.png">
+		</div>
+
+		<div class="arrow right">
+			<img src="right.png">
+		</div>
+
+		<div class="slider-grid">
+			<div style="display: flex;"> 
+				<img src="character4.jpg">
+				<img src="character2.jpg">
+			</div>
+			<div style="display: flex;"> 
+				<img src="character5.jpg">
+				<img src="character1.jpg">
+			</div>
+			
+		</div>
+	</div>
+
+	<h2>Using grid instead of image</h2>
+	<p>A better alternative if every box needs a different number of children.</p>
+	<div class="slider-container">
+		<div class="arrow left">
+			<img src="left.png">
+		</div>
+
+		<div class="arrow right">
+			<img src="right.png">
+		</div>
+
+		<div class="slider-grid">
+			<div style="display: grid; grid-template-columns: repeat(3, 1fr)"> 
+				<img src="character4.jpg">
+				<img src="character2.jpg">
+				<img src="character3.jpg">
+			</div>
+			<div style="display: grid; grid-template-columns: repeat(2, 1fr)"> 
+				<img src="character5.jpg">
+				<img src="character1.jpg">
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>
