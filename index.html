@@ -80,7 +80,8 @@ h1, h2, p {
 </style>
 
 <script>
-document.onload = () => {
+document.addEventListener("DOMContentLoaded",  () => {
+	console.log('uwu')
 	// Slider code
 	// Apply to all slider in the page
 	document.querySelectorAll('.slider-container').forEach( (slider) => {
@@ -170,7 +171,7 @@ document.onload = () => {
 		setTimeout(toggleAnimation, 10)
 
 	})
-}
+})
 </script>
 
 </head>
