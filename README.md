@@ -11,3 +11,5 @@ It uses modern HTML/CSS/JS features that are probably not available for e.g. Int
 If you're using a framework like React, there's probably a more effective way of implementing this. This is just one way to do it.
 
 The images I use for this sample came from the official page of the mobile game [SinoAlice](https://sinoalice.global/). I believe using it in this way fall under educational fair use.
+
+I wrote a lengthy blog post about creating this in [my blog](https://pseudomon.wordpress.com/2020/04/12/creating-an-image-slider-with-vanilla-html-css-js/). It's probably more useful to people who are just starting out with front-end development.
