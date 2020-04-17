@@ -80,7 +80,7 @@ h1, h2, p {
 </style>
 
 <script>
-window.onload = () => {
+document.onload = () => {
 	// Slider code
 	// Apply to all slider in the page
 	document.querySelectorAll('.slider-container').forEach( (slider) => {
@@ -89,10 +89,9 @@ window.onload = () => {
 		let q = (selector) => {
 			return slider.querySelector(selector)
 		}
-		let qall = (selector) => {
-			return slider.querySelectorAll(selector)
-		}
 
+		// Get current image id from dataset
+		// default to 0 if it's not set
 		if (!slider.dataset.currentImage) {
 			slider.dataset.currentImage = 0
 		}
@@ -136,13 +135,6 @@ window.onload = () => {
 			}
 		}
 
-		// Set initial image shown
-		// Turn off animation just for this initial setup
-		updateArrowVisibility()
-		toggleAnimation()
-		changePos(currentImageId)
-		setTimeout(toggleAnimation, 10)
-
 		rightArrow.onclick = () => {
 			currentImageId += 1
 
@@ -152,7 +144,7 @@ window.onload = () => {
 			}
 			else {
 				changePos(currentImageId)
-				updateArrowVisibility()
+				updateArrowVisibility()	
 			}
 
 		}
@@ -170,6 +162,13 @@ window.onload = () => {
 			}
 		}
 
+		// Set initial image shown
+		// Turn off animation just for this initial setup
+		updateArrowVisibility()
+		toggleAnimation()
+		changePos(currentImageId)
+		setTimeout(toggleAnimation, 10)
+
 	})
 }
 </script>
@@ -180,23 +179,23 @@ window.onload = () => {
 <div style="max-width: 600px; margin: 0 auto;">
 	<h1>Pure HTML/CSS/JS Slider</h1>
 	<h2>Default Example</h2>
-	<div class="slider-container">
-		<div class="arrow left">
-			<img src="images/left.png">
-		</div>
+		<div class="slider-container">
+			<div class="arrow left">
+				<img src="images/left.png">
+			</div>
 
-		<div class="arrow right">
-			<img src="images/right.png">
-		</div>
+			<div class="arrow right">
+				<img src="images/right.png">
+			</div>
 
-		<div class="slider-inner">
-			<img src="images/character4.jpg">
-			<img src="images/character2.jpg">
-			<img src="images/character3.jpg">
-			<img src="images/character5.jpg">
-			<img src="images/character6.jpg">
+			<div class="slider-inner">
+				<img src="images/character4.jpg">
+				<img src="images/character2.jpg">
+				<img src="images/character3.jpg">
+				<img src="images/character5.jpg">
+				<img src="images/character6.jpg">
+			</div>
 		</div>
-	</div>
 
 	<h2> Different Initial image</h2>
 	<div class="slider-container" data-current-image="3">
