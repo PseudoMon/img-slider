@@ -38,7 +38,7 @@ var slider = new ImageSlider(document.getElementById('my-slider'))
 ````
 
 ### In the HTML
-You can look `index.html` in this repository for examples, but in general, your slider should look like this:
+You can look at `index.html` in this repository for example on how to use it, but in general, your slider's HTML should look like this:
 ```html
 <div class="slider-container">
 	<div class="arrow left">
@@ -63,7 +63,7 @@ You can change the first image being shown using the `data-current-image` attrib
 ### Interacting with the slider within the script
 You don't have to bother with this section if you don't want to manipulate the slider programatically. 
 
-Creating the ImageSlider object will automatically makes the arrow work to slide left and right. The object also have the following methods that you can use:
+The ImageSlider object will have the following methods that you can use:
 
 - `changePos(id)` will slide it to the image with that id. The leftmost image has the id 0, the one to its right is 1, and so on.
 - `toggleAnimation()` will toggle the slider's animation on and off.
