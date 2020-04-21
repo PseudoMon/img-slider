@@ -12,163 +12,19 @@ body {
 h1, h2, p {
 	text-align: center;
 }
-
-.slider-container {
-	/* Positioning the slider.
-	Feel free to change! */
-	width: 90%;
-	max-width: 800px;
-	margin: 10px auto;
-
-	/* Don't change these */
-	position: relative; 
-	overflow-x: hidden;
-}
-
-.arrow {
-	/* Don't change these */
-	position: absolute; 
-	display: flex;
-	align-items: center;
-	height: 100%;
-	z-index: 10;
-	/* But you can change this one */
-	cursor: pointer;
-}
-
-.arrow.left {
-	/* Positioning the arrow.
-	 Feel free to change! */
-	left: 10px;
-}
-
-.arrow.right {
-	/* Positioning the arrow.
-	 Feel free to change! */
-	right: 10px;
-}
-
-.slider-inner {
-	/* Don't change these */
-	display: flex;
-	position: relative;
-	left: 0; 		
-
-	/* Feel free to change these! */
-	align-items: center;
-	transition: left 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-}
-
-.slider-inner > * {
-	/* Don't change this */
-	min-width: 100%; 
-
-	/* To keep it looking neat, don't change these */
-	margin: 0;
-	box-sizing: border-box;
-}
-
-.slider-container img {
-	/* These will keep image's size proportional and make sure it doesn't bleed outside the box. */
-	max-width: 100%;
-	object-fit: contain;
-}
-
-.noanim {
-	transition: none;
-}
 </style>
 
+<link rel="stylesheet" href="img-slider.css">
+<script src="img-slider.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded",  () => {
-	console.log('uwu')
-	// Slider code
-	// Apply to all slider in the page
+
+	var allSliders = []
+	// Create an ImageSlider object
+	// for all sliders in the page
 	document.querySelectorAll('.slider-container').forEach( (slider) => {
 
-		// Utility querier
-		let q = (selector) => {
-			return slider.querySelector(selector)
-		}
-
-		// Get current image id from dataset
-		// default to 0 if it's not set
-		if (!slider.dataset.currentImage) {
-			slider.dataset.currentImage = 0
-		}
-		let currentImageId = parseInt(slider.dataset.currentImage)
-
-		let rightArrow = q('.arrow.right')
-		let leftArrow = q('.arrow.left')
-
-		let sliderInner = q('.slider-inner')
-		let maxImageId = sliderInner.children.length - 1
-		// We use "image" but the children of the slider can be also be a flexbox or grid
-
-		// Toggle animation in the slider grid
-		let toggleAnimation = () => {
-			sliderInner.classList.toggle('noanim') 
-		}
-
-		// Switch which image is being shown
-		let changePos = (imageId) => {
-			let percentage = imageId * 100
-
-
-			sliderInner.style.left = -percentage.toString() + "%"
-
-			slider.dataset.currentImage = currentImageId.toString()
-		}
-
-		// Make the left/rightmost arrow invisible when left/rightmost image is shown
-		let updateArrowVisibility = () => {
-			if (currentImageId == maxImageId) {
-				rightArrow.style.visibility = "hidden"
-			} 
-			else {
-				rightArrow.style.visibility = "visible"
-			}
-			if (currentImageId == 0) {
-				leftArrow.style.visibility = "hidden"
-			}
-			else {
-				leftArrow.style.visibility = "visible"
-			}
-		}
-
-		rightArrow.onclick = () => {
-			currentImageId += 1
-
-			// No change if it's the rightmost image
-			if (currentImageId > maxImageId) {
-				currentImageId = maxImageId
-			}
-			else {
-				changePos(currentImageId)
-				updateArrowVisibility()	
-			}
-
-		}
-
-		leftArrow.onclick = () => {
-			currentImageId -= 1
-
-			// No change if it's the leftmost image
-			if (currentImageId < 0) {
-				currentImageId = 0
-			}
-			else {
-				changePos(currentImageId)
-				updateArrowVisibility()
-			}
-		}
-
-		// Set initial image shown
-		// Turn off animation just for this initial setup
-		updateArrowVisibility()
-		toggleAnimation()
-		changePos(currentImageId)
-		setTimeout(toggleAnimation, 10)
+		allSliders.push(new ImageSlider(slider)) 
 
 	})
 })

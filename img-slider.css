@@ -1,0 +1,64 @@
+.slider-container {
+	/* Positioning the slider.
+	Feel free to change! */
+	width: 90%;
+	max-width: 800px;
+	margin: 10px auto;
+
+	/* Don't change these */
+	position: relative; 
+	overflow-x: hidden;
+}
+
+.slider-container .arrow {
+	/* Don't change these */
+	position: absolute; 
+	display: flex;
+	align-items: center;
+	height: 100%;
+	z-index: 10;
+	/* But you can change this one */
+	cursor: pointer;
+}
+
+.slider-container .arrow.left {
+	/* Positioning the arrow.
+	 Feel free to change! */
+	left: 10px;
+}
+
+.slider-container .arrow.right {
+	/* Positioning the arrow.
+	 Feel free to change! */
+	right: 10px;
+}
+
+.slider-inner {
+	/* Don't change these */
+	display: flex;
+	position: relative;
+	left: 0; 		
+
+	/* Feel free to change these! */
+	align-items: center;
+	transition: left 1s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.slider-inner > * {
+	/* Don't change this */
+	min-width: 100%; 
+
+	/* To keep it looking neat, don't change these */
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.slider-container img {
+	/* These will keep image's size proportional and make sure it doesn't bleed outside the box. */
+	max-width: 100%;
+	object-fit: contain;
+}
+
+.noanim {
+	transition: none;
+}
